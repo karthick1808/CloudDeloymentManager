@@ -1,0 +1,12 @@
+resources:
+- name: my-cloud-sql-instance
+  type: sqladmin.v1beta4.instance
+  properties:
+    region: us-central1
+    backendType: SECOND_GEN
+    databaseVersion: MYSQL_5_7
+    settings:
+      tier: db-f1-micro
+      backupConfiguration:
+        enbled: true
+        StartTime: 01:00

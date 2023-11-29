@@ -1,0 +1,48 @@
+resources:
+
+- name: karthick-first-vm
+  type: compute.v1.instance
+  properties:
+    zone: asia-south1-a
+    machineType: https://www.googleapis.com/compute/v1/projects/karthick-selvam/zones/asia-south1-a/machineTypes/e2-small
+    disks:
+    - deviceName: boot
+      type: PERSISTENT
+      boot: true
+      autoDelete: true
+      initializeParams:
+        sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-11
+    networkInterfaces:
+    # The resource's "network value" has been replaced with a
+    # reference to the new network's "selfLink" property. The network 
+    # resource has been added to the end of this file.
+    - network: $(ref.karthick-new-network.selfLink)
+      accessConfigs:
+      - name: External NAT
+        type: ONE_TO_ONE_NAT
+- name: karthick-second-vm
+  type: compute.v1.instance
+  properties:
+    zone: asia-south1-b
+    machineType: https://www.googleapis.com/compute/v1/projects/karthick-selvam/zones/asia-south1-b/machineTypes/e2-small
+    disks:
+    - deviceName: boot
+      type: PERSISTENT
+      boot: true
+      autoDelete: true
+      initializeParams:
+        sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-11
+    networkInterfaces:
+    # As in the resource above, the "network" value has been replaced with 
+    # the new network's "selfLink" property. 
+    - network: $(ref.karthick-new-network.selfLink)
+      accessConfigs:
+      - name: External NAT
+        type: ONE_TO_ONE_NAT
+# The following network is a new resource added to the "two-vms.yaml" file.
+- name: karthick-new-network
+  type: compute.v1.network
+  properties:
+    routingConfig:
+      routingMode: REGIONAL
+    autoCreateSubnetworks: true

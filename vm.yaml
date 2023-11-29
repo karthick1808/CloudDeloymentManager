@@ -1,0 +1,18 @@
+resources:
+- name: karthick-debian-mumbai1
+  type: compute.v1.instance
+  properties:
+    zone: asia-south1-a
+    machineType: https://www.googleapis.com/compute/v1/projects/karthick-selvam/zones/asia-south1-a/machineTypes/e2-micro
+    disks:
+    - deviceName: boot
+      type: PERSISTENT
+      boot: true
+      autoDelete: true
+      initializeParams:
+        sourceImage: https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/images/family/ubuntu-2204-lts
+    networkInterfaces:
+    - network: https://www.googleapis.com/compute/v1/projects/karthick-selvam/global/networks/default
+      accessConfigs:
+      - name: External NAT
+        type: ONE_TO_ONE_NAT

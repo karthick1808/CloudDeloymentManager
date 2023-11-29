@@ -1,0 +1,17 @@
+resources:
+- name: karthick180887-rakuten-training1
+  type: storage.v1.bucket
+  properties:
+    location: asia-south1
+    storageClass: STANDARD
+    acl:
+    - role: READER
+      entity: allAuthenticatedUsers
+- name: karthick180887-rakuten-training2
+  type: storage.v1.bucket
+  properties:
+    location: asia-south1
+    storageClass: STANDARD
+    acl:
+    - role: READER
+      entity: allAuthenticatedUsers
